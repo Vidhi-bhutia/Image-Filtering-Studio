@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flask Image Filters</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Minimal, no external API keys. Using system fonts for speed. -->
+</head>
+<body>
+  <div class="gradient-bg"></div>
+  <header class="container">
+    <h1 class="title">✨ Image Filter Studio</h1>
+    <p class="subtitle">Upload a photo & play with filters.</p>
+  </header>
+  <main class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for m in messages %}<div>{{ m }}</div>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container footer">
+    Built with Flask + Pillow
+  </footer>
+</body>
+</html>

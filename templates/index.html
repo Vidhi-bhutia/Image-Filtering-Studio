@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <form class="grid" action="{{ url_for('process') }}" method="post" enctype="multipart/form-data">
+    <div class="field">
+      <label>Choose Image</label>
+      <input type="file" name="image" accept="image/png,image/jpeg,image/jpg,image/webp" required />
+      <small>PNG, JPG, or WEBP up to ~10MB recommended.</small>
+    </div>
+
+    <div class="field">
+      <label>Filter</label>
+      <select name="filter">
+        <option value="none">None</option>
+        <option value="grayscale">Grayscale</option>
+        <option value="blur">Blur</option>
+        <option value="contour">Contour</option>
+        <option value="edge_enhance">Edge Enhance</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Blur Strength (if Blur)</label>
+      <input type="range" name="blur_strength" min="0" max="25" value="2" />
+    </div>
+
+    <div class="field">
+      <label>Rotate (°)</label>
+      <input type="number" name="rotate" min="0" max="359" value="0" />
+    </div>
+
+    <div class="field row">
+      <label class="checkbox"><input type="checkbox" name="flip_h" /> Flip Horizontal</label>
+      <label class="checkbox"><input type="checkbox" name="flip_v" /> Flip Vertical</label>
+    </div>
+
+    <div class="field">
+      <label>Brightness</label>
+      <input type="range" name="brightness" min="0.2" max="2.0" step="0.1" value="1.0" />
+    </div>
+
+    <div class="field">
+      <label>Contrast</label>
+      <input type="range" name="contrast" min="0.2" max="2.0" step="0.1" value="1.0" />
+    </div>
+
+    <button type="submit" class="btn">Process Image</button>
+  </form>
+</div>
+
+{% if processed_url %}
+<div class="card preview">
+  <h2>Result</h2>
+  <img class="result-img" src="{{ processed_url }}" alt="Processed image" />
+  <div class="actions">
+    <a class="btn outline" href="{{ processed_url }}" download>Download</a>
+    <a class="btn ghost" href="{{ url_for('index') }}">Try another →</a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
