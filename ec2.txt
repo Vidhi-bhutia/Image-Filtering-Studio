@@ -1,0 +1,10 @@
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl status mysql
+sudo mysql
+
+a. CREATE DATABASE mysqlaws;
+b. USE mysqlaws;
+c. CREATE TABLE student (name VARCHAR(50), regno VARCHAR(10));
+d. INSERT INTO student VALUES(“Vidhi”, “22BBS0171”));
+e. SELECT * FROM student;
